@@ -8,4 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppThemeNoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CommonPadding">
+        <item name="android:layout_marginLeft">@dimen/common_margin</item>
+        <item name="android:layout_marginRight">@dimen/common_margin</item>
+        <item name="android:layout_marginTop">@dimen/common_margin</item>
+        <item name="android:layout_marginBottom">@dimen/common_margin</item>
+    </style>
+
+
+    <style name="CommonPaddingLR">
+        <item name="android:layout_marginLeft">@dimen/common_margin</item>
+        <item name="android:layout_marginRight">@dimen/common_margin</item>
+    </style>
+
+    <style name="CommonPaddingTB">
+        <item name="android:layout_marginTop">@dimen/common_margin</item>
+        <item name="android:layout_marginBottom">@dimen/common_margin</item>
+    </style>
+
 </resources>
