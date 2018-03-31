@@ -41,8 +41,13 @@ dependencies {
 
     compile 'com.android.support:cardview-v7:21.0.+'
     compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile 'com.android.support:appcompat-v7:21.0.+'
 
     //libs for parser Json to Pojo
     compile 'com.google.code.gson:gson:2.8.2'
 
+    //retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.4.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.4.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 }

@@ -6,7 +6,7 @@ package com.example.root.moviedb.Utils
  */
 object Constants{
     object Url{
-        val BASE_URL = "https://api.themoviedb.org/3"
+        val BASE_URL = "https://api.themoviedb.org/3/"
     }
 
 }
