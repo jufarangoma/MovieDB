@@ -5,23 +5,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="android.view.View"/>
+
         <variable
             name="movieViewModel"
             type="com.example.root.moviedb.ViewModel.MovieViewModel" />
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Views.Activity.MovieActivity">
+        tools:context=".Views.Activity.MovieActivity"
+        android:background="@color/colorPrimary">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list_movies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/CommonPaddingLR">
+            android:layout_centerInParent="true">
         </android.support.v7.widget.RecyclerView>
 
-    </LinearLayout>
+    </RelativeLayout>
 </layout>

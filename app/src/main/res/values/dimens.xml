@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="card_movie_width">350dp</dimen>
-    <dimen name="card_movie_height">400dp</dimen>
+    <dimen name="card_movie_width">280dp</dimen>
+    <dimen name="card_movie_height">450dp</dimen>
     <dimen name="card_movie_corner_radius">10dp</dimen>
     <dimen name="card_movie_elevation">5dp</dimen>
     <dimen name="card_movie_iv_height">250dp</dimen>

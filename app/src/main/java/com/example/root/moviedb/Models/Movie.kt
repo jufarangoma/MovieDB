@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
 * Created by Juan Arango on 3/29/18.
 */
 
-class Movie: RealmObject() {
+class Movie : RealmObject() {
 
     @SerializedName("id")
     @Expose

@@ -28,7 +28,6 @@ class MovieViewModel():Observable(){
         this.context=context
         this.movies=ArrayList<Movie>()
         compositeDisposable = CompositeDisposable()
-        //movieRecycler = ObservableInt(View.GONE)
         fetchMoviesList(path,queries)
     }
 
@@ -47,17 +46,20 @@ class MovieViewModel():Observable(){
                 }, object : Consumer<Throwable> {
                     @Throws(Exception::class)
                     override fun accept(throwable: Throwable) {
-                        //messageLabel.set(context.getString(R.string.error_message_loading_users))
-                        println("fail")
+                        onFailureRequest(throwable.toString())
                     }
                 })
         compositeDisposable!!.add(disposable)
     }
 
     fun updateMovieList(arrayMovies: ArrayList<Movie>){
-        movies!!.containsAll(arrayMovies)
+        movies!!.addAll(arrayMovies)
         setChanged()
         notifyObservers()
+    }
+
+    fun onFailureRequest(string: String):String{
+        return string
     }
 
     fun getUserList(): ArrayList<Movie> {

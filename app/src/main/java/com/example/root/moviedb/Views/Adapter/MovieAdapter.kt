@@ -42,9 +42,9 @@ class MovieAdapter(): RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder>(
 
         fun setMovie(movie: Movie){
             if (cardMovieBinding.itemViewModel == null) {
-                cardMovieBinding.itemViewModel = ItemMovieViewModel()
+                cardMovieBinding.itemViewModel = ItemMovieViewModel(movie,itemView.context)
             } else {
-                //cardMovieBinding.itemViewModel.setMovie(movie)
+                cardMovieBinding.itemViewModel!!.setMovie(movie)
             }
         }
     }

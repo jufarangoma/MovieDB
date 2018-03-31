@@ -4,20 +4,24 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.support.v7.app.AppCompatActivity
 import com.example.root.moviedb.ViewModel.MovieViewModel
-import com.example.root.moviedb.Views.Base.BaseView
+
 import java.util.*
 import android.databinding.DataBindingUtil
 import android.provider.SyncStateContract
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.widget.LinearLayout
+import com.example.root.moviedb.BR
 import com.example.root.moviedb.R
 import com.example.root.moviedb.Utils.Constants
+import com.example.root.moviedb.Views.Adapter.MovieAdapter
 import com.example.root.moviedb.databinding.ActivityHomeBinding
 
 
 /**
  * Created by Juan Arango on 3/30/18.
  */
-class MovieActivity: BaseView(), Observer{
+class MovieActivity: AppCompatActivity(), Observer{
 
     var movieViewModel: MovieViewModel?=null
     var activityHomebinding: ActivityHomeBinding?=null
@@ -27,6 +31,7 @@ class MovieActivity: BaseView(), Observer{
         callService()
         initBinding()
         setListofMoview(activityHomebinding!!.rvListMovies)
+        setUpObserver(movieViewModel!!)
     }
 
     fun callService(){
@@ -36,15 +41,26 @@ class MovieActivity: BaseView(), Observer{
     }
 
     fun initBinding(){
-        activityHomebinding = DataBindingUtil.setContentView(this, R.layout.activity_home)
+        activityHomebinding = DataBindingUtil.setContentView<ActivityHomeBinding>(this, R.layout.activity_home)
         activityHomebinding!!.movieViewModel = movieViewModel
     }
 
-    private fun setListofMoview(rvListMovies: RecyclerView) {
+    private fun setListofMoview(listMovies: RecyclerView) {
+        listMovies.adapter = MovieAdapter()
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.orientation = LinearLayout.HORIZONTAL
+        listMovies.layoutManager = layoutManager
 
     }
 
-    override fun update(p0: Observable?, p1: Any?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun setUpObserver(observable: Observable) {
+        observable.addObserver(this)
+    }
+
+    override fun update(observable: Observable?, arg: Any?) {
+        if (observable is MovieViewModel) {
+            val movieAdapter= activityHomebinding!!.rvListMovies.getAdapter() as MovieAdapter
+            movieAdapter.setMovieList(observable.getUserList())
+        }
     }
 }

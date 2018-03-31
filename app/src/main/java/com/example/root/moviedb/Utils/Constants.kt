@@ -8,13 +8,14 @@ object Constants{
     object Url{
         val BASE_URL = "https://api.themoviedb.org/3/"
         val DISCOVER = "discover/movie"
+        val IMAGES = "https://image.tmdb.org/t/p/w500/"
     }
 
     object Value{
-        val API_KEY = "api_key"
+        val API_KEY = "34b7e528efc37e20e1af4684bee2a868"
     }
 
     object Key{
-        val API_KEY = "34b7e528efc37e20e1af4684bee2a868"
+        val API_KEY = "api_key"
     }
 }
