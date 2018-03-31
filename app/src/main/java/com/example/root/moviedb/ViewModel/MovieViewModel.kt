@@ -2,6 +2,7 @@ package com.example.root.moviedb.ViewModel
 
 import android.content.Context
 import android.databinding.ObservableInt
+import android.view.View
 import com.example.root.moviedb.App.AppController
 import com.example.root.moviedb.DataAccess.Connection.MovieService
 import com.example.root.moviedb.Models.BodyResponse
@@ -19,12 +20,15 @@ class MovieViewModel():Observable(){
 
     var movies: ArrayList<Movie>?=null
     var context: Context?=null
-    var compositeDisposable = CompositeDisposable()
+    var compositeDisposable : CompositeDisposable?=null
     var progressBar: ObservableInt?=null
+    var movieRecycler: ObservableInt?=null
 
     constructor(context: Context, path:String, queries: Map<String, String>):this(){
         this.context=context
         this.movies=ArrayList<Movie>()
+        compositeDisposable = CompositeDisposable()
+        //movieRecycler = ObservableInt(View.GONE)
         fetchMoviesList(path,queries)
     }
 
@@ -47,12 +51,28 @@ class MovieViewModel():Observable(){
                         println("fail")
                     }
                 })
-        compositeDisposable.add(disposable)
+        compositeDisposable!!.add(disposable)
     }
 
     fun updateMovieList(arrayMovies: ArrayList<Movie>){
         movies!!.containsAll(arrayMovies)
         setChanged()
         notifyObservers()
+    }
+
+    fun getUserList(): ArrayList<Movie> {
+        return movies!!
+    }
+
+    private fun unSubscribeFromObservable() {
+        if (!compositeDisposable!!.isDisposed) {
+            compositeDisposable!!.dispose()
+        }
+    }
+
+    fun reset() {
+        unSubscribeFromObservable()
+        compositeDisposable = null
+        context = null
     }
 }

@@ -33,4 +33,7 @@
         <item name="android:layout_marginBottom">@dimen/common_margin</item>
     </style>
 
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 </resources>

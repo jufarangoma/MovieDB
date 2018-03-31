@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
@@ -50,4 +49,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.4.0'
     compile 'com.squareup.retrofit2:converter-gson:2.4.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    kapt 'com.android.databinding:compiler:3.0.1'
 }
