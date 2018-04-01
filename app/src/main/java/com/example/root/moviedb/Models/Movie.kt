@@ -4,32 +4,34 @@ import android.databinding.DataBindingUtil
 import io.realm.RealmObject
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 
 /**
 * Created by Juan Arango on 3/29/18.
 */
 
-class Movie : RealmObject() {
+open class Movie: RealmObject(), Serializable {
 
     @SerializedName("id")
     @Expose
-    val id: Int?=null
+    @PrimaryKey var id: Int?=null
     @SerializedName("vote_average")
     @Expose
-    val vote_average: Double?=null
+    var vote_average: Double?=null
     @SerializedName("title")
     @Expose
-    val title: String?=null
+    var title: String?=null
     @SerializedName("poster_path")
     @Expose
-    val poster_path:String?=null
+    var poster_path:String?=null
     @SerializedName("overview")
     @Expose
-    val overview: String?=null
+    var overview: String?=null
     @SerializedName("backdrop_path")
     @Expose
-    val backdrop_path:String?=null
+    var backdrop_path:String?=null
     @SerializedName("release_date")
     @Expose
-    val release_date:String?=null
+    var release_date:String?=null
 }

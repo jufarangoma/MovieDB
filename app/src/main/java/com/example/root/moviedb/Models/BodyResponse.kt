@@ -3,6 +3,8 @@ package com.example.root.moviedb.Models
 import java.util.ArrayList
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import io.realm.RealmList
+import io.realm.RealmObject
 
 /**
 * Created by Juan Arango on 3/30/18.
@@ -11,8 +13,8 @@ import com.google.gson.annotations.SerializedName
 class BodyResponse{
     @SerializedName("page")
     @Expose
-    val page: Int?=null
+    var page: Int?=null
     @SerializedName("results")
     @Expose
-    val results: ArrayList<Movie>?=null
+    var results: RealmList<Movie>?=null
 }

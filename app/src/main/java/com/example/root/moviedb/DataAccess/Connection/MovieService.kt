@@ -11,5 +11,5 @@ import retrofit2.http.Url;
 
 interface MovieService {
     @GET
-    open fun getMovies(@Url path:String,@QueryMap query: Map<String,String>): Observable<BodyResponse>
+    fun getMovies(@Url path:String,@QueryMap query: Map<String,String>): Observable<BodyResponse>
 }

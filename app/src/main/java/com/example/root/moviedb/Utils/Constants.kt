@@ -13,9 +13,12 @@ object Constants{
 
     object Value{
         val API_KEY = "34b7e528efc37e20e1af4684bee2a868"
+        val NOINTERNET = "no internet"
     }
 
     object Key{
         val API_KEY = "api_key"
+        val MOVIE= "Movie"
+        val Action = "action"
     }
 }

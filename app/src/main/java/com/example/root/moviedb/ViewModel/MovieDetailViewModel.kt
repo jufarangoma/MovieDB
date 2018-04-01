@@ -4,29 +4,22 @@ import android.content.Context
 import android.databinding.BaseObservable
 import android.databinding.Bindable
 import android.databinding.BindingAdapter
-import android.databinding.DataBindingUtil
-import android.view.View
 import android.widget.ImageView
-import com.android.databinding.library.baseAdapters.BR
 import com.bumptech.glide.Glide
 import com.example.root.moviedb.Models.Movie
 import com.example.root.moviedb.Utils.Constants
-import com.example.root.moviedb.Views.Activity.MovieDetailActivity
-/*import com.vicpin.krealmextensions.queryAll
-import com.vicpin.krealmextensions.queryFirst*/
-import org.jetbrains.anko.startActivity
+import java.util.*
 
 /**
- * Created by Juan Arango on 3/30/18.
+ * Created by Juan Arango on 3/31/18.
  */
-class ItemMovieViewModel(): BaseObservable(){
+class MovieDetailViewModel(): BaseObservable() {
 
     private var movie: Movie?=null
-    var context: Context?=null
 
-    constructor(movie: Movie, context: Context):this(){
+    constructor(movie: Movie):this(){
         this.movie = movie
-        this.context = context
+
     }
 
     var title: String?= "" @Bindable get() { return movie!!.title!! }
@@ -35,16 +28,6 @@ class ItemMovieViewModel(): BaseObservable(){
     var photoUrl: String?= "" @Bindable get() {
         val url = Constants.Url.IMAGES + movie!!.poster_path
         return url
-    }
-
-    fun onItemClick(v: View) {
-        context!!.startActivity<MovieDetailActivity>(Constants.Key.MOVIE to movie)
-        //movie!!.queryAll()
-    }
-
-    fun setMovie(movie: Movie){
-        this.movie = movie
-        notifyChange()
     }
 
     object ImageBindingAdapter {

@@ -8,4 +8,5 @@
     <dimen name="card_movie_iv_width">175dp</dimen>
     <dimen name="common_margin_top">10dp</dimen>
     <dimen name="common_margin">15dp</dimen>
+    <dimen name="collapsion_toolbar_height">300dp</dimen>
 </resources>
