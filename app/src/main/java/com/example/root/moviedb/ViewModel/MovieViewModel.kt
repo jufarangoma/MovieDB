@@ -2,15 +2,20 @@ package com.example.root.moviedb.ViewModel
 
 import android.content.Context
 import android.databinding.ObservableInt
-import android.view.View
 import com.example.root.moviedb.App.AppController
-import com.example.root.moviedb.DataAccess.Connection.MovieService
 import com.example.root.moviedb.Models.BodyResponse
 import com.example.root.moviedb.Models.Movie
+//import com.vicpin.krealmextensions.getRealmInstance
+//import com.vicpin.krealmextensions.queryAll
+//import com.vicpin.krealmextensions.save
+//import com.vicpin.krealmextensions.saveAll
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import java.util.*
+import io.realm.Realm
+import io.realm.RealmObject
+import retrofit2.http.Body
 import kotlin.collections.ArrayList
 
 /**
@@ -23,6 +28,7 @@ class MovieViewModel():Observable(){
     var compositeDisposable : CompositeDisposable?=null
     var progressBar: ObservableInt?=null
     var movieRecycler: ObservableInt?=null
+    var bodyResponse: BodyResponse?=null
 
     constructor(context: Context, path:String, queries: Map<String, String>):this(){
         this.context=context
@@ -41,7 +47,9 @@ class MovieViewModel():Observable(){
                 .subscribe(object : Consumer<BodyResponse> {
                     @Throws(Exception::class)
                     override fun accept(bodyResponse: BodyResponse) {
-                        updateMovieList(bodyResponse.results!!)
+                        var realm = Realm.getDefaultInstance()
+                        realm.executeTransaction { transaction -> transaction.copyToRealmOrUpdate(bodyResponse.results!!) }
+                        updateMovieList(realm)
                     }
                 }, object : Consumer<Throwable> {
                     @Throws(Exception::class)
@@ -52,8 +60,9 @@ class MovieViewModel():Observable(){
         compositeDisposable!!.add(disposable)
     }
 
-    fun updateMovieList(arrayMovies: ArrayList<Movie>){
-        movies!!.addAll(arrayMovies)
+    fun updateMovieList(realm: Realm){
+        val results = realm.where(Movie::class.java).findAll()
+        movies!!.addAll(realm.copyFromRealm(results))
         setChanged()
         notifyObservers()
     }

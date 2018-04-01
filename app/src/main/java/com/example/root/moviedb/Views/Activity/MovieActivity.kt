@@ -16,6 +16,7 @@ import com.example.root.moviedb.R
 import com.example.root.moviedb.Utils.Constants
 import com.example.root.moviedb.Views.Adapter.MovieAdapter
 import com.example.root.moviedb.databinding.ActivityHomeBinding
+import io.realm.Realm
 
 
 /**
@@ -28,6 +29,7 @@ class MovieActivity: AppCompatActivity(), Observer{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Realm.init(this)
         callService()
         initBinding()
         setListofMoview(activityHomebinding!!.rvListMovies)
@@ -63,4 +65,5 @@ class MovieActivity: AppCompatActivity(), Observer{
             movieAdapter.setMovieList(observable.getUserList())
         }
     }
+
 }
