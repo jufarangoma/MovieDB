@@ -38,8 +38,7 @@ class ItemMovieViewModel(): BaseObservable(){
     }
 
     fun onItemClick(v: View) {
-        context!!.startActivity<MovieDetailActivity>(Constants.Key.MOVIE to movie)
-        //movie!!.queryAll()
+        context!!.startActivity<MovieDetailActivity>(Constants.Key.ID to movie!!.id)
     }
 
     fun setMovie(movie: Movie){

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MovieDB</string>
+    <string name="red_error">Sin acceso a internet</string>
+    <string name="error">error</string>
+    <string name="exit">Cerrar</string>
 </resources>

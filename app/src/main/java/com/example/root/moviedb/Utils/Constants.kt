@@ -20,5 +20,6 @@ object Constants{
         val API_KEY = "api_key"
         val MOVIE= "Movie"
         val Action = "action"
+        val ID = "id"
     }
 }

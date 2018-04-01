@@ -28,8 +28,13 @@
         <activity
             android:name=".Views.Activity.MovieDetailActivity"
             android:theme="@style/AppThemeNoActionBar">
-
         </activity>
+
+    <receiver android:name=".Utils.NetworkStateReceiver">
+        <intent-filter>
+            <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+        </intent-filter>
+    </receiver>
     </application>
 
 </manifest>

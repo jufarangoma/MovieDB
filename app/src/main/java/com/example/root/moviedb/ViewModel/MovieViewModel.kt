@@ -5,6 +5,8 @@ import android.databinding.ObservableInt
 import com.example.root.moviedb.App.AppController
 import com.example.root.moviedb.Models.BodyResponse
 import com.example.root.moviedb.Models.Movie
+import com.example.root.moviedb.Utils.Utils
+import com.example.root.moviedb.Views.Base.BaseView
 //import com.vicpin.krealmextensions.getRealmInstance
 //import com.vicpin.krealmextensions.queryAll
 //import com.vicpin.krealmextensions.save
@@ -26,9 +28,6 @@ class MovieViewModel():Observable(){
     var movies: ArrayList<Movie>?=null
     var context: Context?=null
     var compositeDisposable : CompositeDisposable?=null
-    var progressBar: ObservableInt?=null
-    var movieRecycler: ObservableInt?=null
-    var bodyResponse: BodyResponse?=null
 
     constructor(context: Context, path:String, queries: Map<String, String>):this(){
         this.context=context
@@ -41,23 +40,27 @@ class MovieViewModel():Observable(){
         val appController = AppController.create(context!!)
         val movieService = appController.movieService!!
 
-        val disposable = movieService.getMovies(path,queries)
-                .subscribeOn(appController.subscribeScheduler())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Consumer<BodyResponse> {
-                    @Throws(Exception::class)
-                    override fun accept(bodyResponse: BodyResponse) {
-                        var realm = Realm.getDefaultInstance()
-                        realm.executeTransaction { transaction -> transaction.copyToRealmOrUpdate(bodyResponse.results!!) }
-                        updateMovieList(realm)
-                    }
-                }, object : Consumer<Throwable> {
-                    @Throws(Exception::class)
-                    override fun accept(throwable: Throwable) {
-                        onFailureRequest(throwable.toString())
-                    }
-                })
-        compositeDisposable!!.add(disposable)
+        if (!Utils.isNetworkAvailable(context!!)){
+            (context as BaseView).showDialog()
+        }else{
+            val disposable = movieService.getMovies(path,queries)
+                    .subscribeOn(appController.subscribeScheduler())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : Consumer<BodyResponse> {
+                        @Throws(Exception::class)
+                        override fun accept(bodyResponse: BodyResponse) {
+                            var realm = Realm.getDefaultInstance()
+                            realm.executeTransaction { transaction -> transaction.copyToRealmOrUpdate(bodyResponse.results!!) }
+                            updateMovieList(realm)
+                        }
+                    }, object : Consumer<Throwable> {
+                        @Throws(Exception::class)
+                        override fun accept(throwable: Throwable) {
+                            onFailureRequest(throwable.toString())
+                        }
+                    })
+            compositeDisposable!!.add(disposable)
+        }
     }
 
     fun updateMovieList(realm: Realm){
@@ -71,7 +74,7 @@ class MovieViewModel():Observable(){
         return string
     }
 
-    fun getUserList(): ArrayList<Movie> {
+    fun getMovieList(): ArrayList<Movie> {
         return movies!!
     }
 
