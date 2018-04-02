@@ -44,7 +44,7 @@
     </style>
     <style name="CollapsedToolbarStyle" parent="@android:style/TextAppearance.Medium">
         <item name="android:textSize">24sp</item>
-        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColor">@color/colorAccent</item>
         <item name="android:textStyle">bold|italic</item>
     </style>
 </resources>

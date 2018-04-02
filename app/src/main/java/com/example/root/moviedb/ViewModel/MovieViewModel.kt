@@ -2,22 +2,17 @@ package com.example.root.moviedb.ViewModel
 
 import android.content.Context
 import android.databinding.ObservableInt
+import android.view.View
 import com.example.root.moviedb.App.AppController
 import com.example.root.moviedb.Models.BodyResponse
 import com.example.root.moviedb.Models.Movie
 import com.example.root.moviedb.Utils.Utils
 import com.example.root.moviedb.Views.Base.BaseView
-//import com.vicpin.krealmextensions.getRealmInstance
-//import com.vicpin.krealmextensions.queryAll
-//import com.vicpin.krealmextensions.save
-//import com.vicpin.krealmextensions.saveAll
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.functions.Consumer
 import java.util.*
 import io.realm.Realm
-import io.realm.RealmObject
-import retrofit2.http.Body
 import kotlin.collections.ArrayList
 
 /**
@@ -28,10 +23,12 @@ class MovieViewModel():Observable(){
     var movies: ArrayList<Movie>?=null
     var context: Context?=null
     var compositeDisposable : CompositeDisposable?=null
+    var progressBar: ObservableInt?=null
 
     constructor(context: Context, path:String, queries: Map<String, String>):this(){
         this.context=context
         this.movies=ArrayList<Movie>()
+        progressBar = ObservableInt(View.VISIBLE)
         compositeDisposable = CompositeDisposable()
         fetchMoviesList(path,queries)
     }
@@ -51,6 +48,7 @@ class MovieViewModel():Observable(){
                         override fun accept(bodyResponse: BodyResponse) {
                             val realm = Realm.getDefaultInstance()
                             realm.executeTransaction { transaction -> transaction.copyToRealmOrUpdate(bodyResponse.results!!) }
+                            progressBar!!.set(View.GONE)
                             updateMovieList(realm)
 
                         }

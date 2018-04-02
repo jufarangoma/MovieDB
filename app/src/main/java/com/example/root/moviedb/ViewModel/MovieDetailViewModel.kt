@@ -24,6 +24,7 @@ class MovieDetailViewModel(): BaseObservable() {
 
     var title: String?= "" @Bindable get() { return movie!!.title!! }
     var overview: String?= "" @Bindable get() { return movie!!.overview!! }
+    var vote: String?=""@Bindable get() { return movie!!.vote_average.toString() }
 
     var photoUrl: String?= "" @Bindable get() {
         val url = Constants.Url.IMAGES + movie!!.poster_path

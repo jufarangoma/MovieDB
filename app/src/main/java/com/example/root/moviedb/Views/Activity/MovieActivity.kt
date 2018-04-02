@@ -21,7 +21,7 @@ import io.realm.Realm
 /**
  * Created by Juan Arango on 3/30/18.
  */
-class MovieActivity: BaseView(), Observer{
+open class MovieActivity: BaseView(), Observer{
 
     var movieViewModel: MovieViewModel?=null
     var activityHomebinding: ActivityHomeBinding?=null
@@ -72,6 +72,11 @@ class MovieActivity: BaseView(), Observer{
             val movieAdapter= activityHomebinding!!.rvListMovies.getAdapter() as MovieAdapter
             movieAdapter.setMovieList(observable.getMovieList())
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        movieViewModel!!.reset()
     }
 
 }

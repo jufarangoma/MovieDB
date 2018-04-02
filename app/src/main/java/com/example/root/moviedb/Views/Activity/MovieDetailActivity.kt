@@ -41,4 +41,12 @@ class MovieDetailActivity: BaseView(){
         movieDetailViewModel = MovieDetailViewModel(movie!!)
         activityMovieDetailBinding!!.movieDetailViewModel = movieDetailViewModel
     }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
 }

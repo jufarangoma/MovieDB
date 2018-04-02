@@ -20,6 +20,8 @@
         card_view:cardUseCompatPadding="true"
         card_view:cardCornerRadius="@dimen/card_movie_corner_radius"
         card_view:cardElevation="@dimen/card_movie_elevation"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
         android:onClick="@{itemViewModel::onItemClick}"
         >
 
