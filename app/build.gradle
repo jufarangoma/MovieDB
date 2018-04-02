@@ -23,6 +23,9 @@ android {
     dataBinding {
         enabled = true
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 realm{
@@ -38,8 +41,11 @@ dependencies {
     implementation 'com.android.support:design:25.3.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test:rules:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    testCompile 'org.mockito:mockito-core:2.17.0'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    testImplementation "android.arch.core:core-testing:1.1.0"
+    testImplementation 'org.mockito:mockito-core:2.17.0'
 
 
 
