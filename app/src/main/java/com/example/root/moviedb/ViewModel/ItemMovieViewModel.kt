@@ -9,7 +9,9 @@ import android.view.View
 import android.widget.ImageView
 import com.android.databinding.library.baseAdapters.BR
 import com.bumptech.glide.Glide
+import com.example.root.moviedb.App.AppController
 import com.example.root.moviedb.Models.Movie
+import com.example.root.moviedb.R
 import com.example.root.moviedb.Utils.Constants
 import com.example.root.moviedb.Views.Activity.MovieDetailActivity
 /*import com.vicpin.krealmextensions.queryAll
@@ -30,9 +32,12 @@ class ItemMovieViewModel(): BaseObservable(){
     }
 
     var title: String?= "" @Bindable get() { return movie!!.title!! }
-    var overview: String?= "" @Bindable get() { return movie!!.overview!! }
+    var overview: String?= "" @Bindable get() {
+        if (movie!!.overview.isNullOrEmpty()) return context!!.getString(R.string.no_overview)
+        return movie!!.overview!! }
 
     var photoUrl: String?= "" @Bindable get() {
+        if(movie!!.poster_path.isNullOrEmpty()) return Constants.Url.NO_IMAGE
         val url = Constants.Url.IMAGES + movie!!.poster_path
         return url
     }

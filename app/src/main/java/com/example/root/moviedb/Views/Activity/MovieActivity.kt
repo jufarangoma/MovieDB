@@ -8,6 +8,7 @@ import java.util.*
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.WindowManager
 import android.widget.LinearLayout
 import com.example.root.moviedb.R
 import com.example.root.moviedb.Utils.Constants
@@ -16,6 +17,10 @@ import com.example.root.moviedb.Views.Adapter.MovieAdapter
 import com.example.root.moviedb.Views.Base.BaseView
 import com.example.root.moviedb.databinding.ActivityHomeBinding
 import io.realm.Realm
+import android.text.Editable
+import android.text.TextWatcher
+import com.example.root.moviedb.Models.Movie
+import kotlin.collections.ArrayList
 
 
 /**
@@ -25,10 +30,13 @@ open class MovieActivity: BaseView(), Observer{
 
     var movieViewModel: MovieViewModel?=null
     var activityHomebinding: ActivityHomeBinding?=null
+    var realm: Realm?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING)
         Realm.init(this)
+        realm = Realm.getDefaultInstance()
         callService()
         initBinding()
         setListofMoview(activityHomebinding!!.rvListMovies)
@@ -39,9 +47,16 @@ open class MovieActivity: BaseView(), Observer{
         super.onResume()
         if (!Utils.isNetworkAvailable(this)){
             showDialog()
+            val results = realm!!.where(Movie::class.java).findAll()
+            if(realm!!.copyFromRealm(results).size>0) {
+                val movieAdapter= activityHomebinding!!.rvListMovies.getAdapter() as MovieAdapter
+                movieAdapter.setMovieList(realm!!.copyFromRealm(results) as ArrayList<Movie>)
+            }
+
         }else{
             callService()
         }
+
     }
 
     fun callService(){
@@ -75,8 +90,8 @@ open class MovieActivity: BaseView(), Observer{
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         movieViewModel!!.reset()
+        super.onDestroy()
     }
 
 }

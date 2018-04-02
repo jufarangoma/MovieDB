@@ -27,7 +27,8 @@
 
         <activity
             android:name=".Views.Activity.MovieDetailActivity"
-            android:theme="@style/AppThemeNoActionBar">
+            android:theme="@style/AppThemeNoActionBar"
+            >
         </activity>
 
     <receiver android:name=".Utils.NetworkStateReceiver">

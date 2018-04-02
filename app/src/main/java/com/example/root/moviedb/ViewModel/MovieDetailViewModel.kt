@@ -6,7 +6,9 @@ import android.databinding.Bindable
 import android.databinding.BindingAdapter
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.example.root.moviedb.App.AppController
 import com.example.root.moviedb.Models.Movie
+import com.example.root.moviedb.R
 import com.example.root.moviedb.Utils.Constants
 import java.util.*
 
@@ -23,7 +25,9 @@ class MovieDetailViewModel(): BaseObservable() {
     }
 
     var title: String?= "" @Bindable get() { return movie!!.title!! }
-    var overview: String?= "" @Bindable get() { return movie!!.overview!! }
+    var overview: String?= "" @Bindable get() {
+        return movie!!.overview!!
+    }
     var vote: String?=""@Bindable get() { return movie!!.vote_average.toString() }
 
     var photoUrl: String?= "" @Bindable get() {
