@@ -49,9 +49,10 @@ class MovieViewModel():Observable(){
                     .subscribe(object : Consumer<BodyResponse> {
                         @Throws(Exception::class)
                         override fun accept(bodyResponse: BodyResponse) {
-                            var realm = Realm.getDefaultInstance()
+                            val realm = Realm.getDefaultInstance()
                             realm.executeTransaction { transaction -> transaction.copyToRealmOrUpdate(bodyResponse.results!!) }
                             updateMovieList(realm)
+
                         }
                     }, object : Consumer<Throwable> {
                         @Throws(Exception::class)
@@ -60,6 +61,7 @@ class MovieViewModel():Observable(){
                         }
                     })
             compositeDisposable!!.add(disposable)
+
         }
     }
 
