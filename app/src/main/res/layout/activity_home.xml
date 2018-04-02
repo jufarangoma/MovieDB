@@ -32,15 +32,10 @@
                 android:layout_weight="9"
                 android:singleLine="true"
                 android:onClick="@{movieViewModel::searchMovie}"
+                android:hint="@string/search"
                 />
 
-            <!--<ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_search"
-                android:onClick="@{movieViewModel::searchMovie}"/>-->
+
 
         </LinearLayout>
 

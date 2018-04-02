@@ -35,10 +35,12 @@ realm{
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    //android Support
     implementation 'com.android.support:cardview-v7:27.0.2'
     implementation 'com.android.support:recyclerview-v7:27.0.2'
     implementation 'com.android.support:appcompat-v7:27.0.2'
-    implementation 'com.android.support:design:25.3.1'
+    implementation 'com.android.support:design:27.0.2'
+    //test unit libs
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test:rules:1.0.1'
@@ -46,26 +48,21 @@ dependencies {
     androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
     testImplementation "android.arch.core:core-testing:1.1.0"
     testImplementation 'org.mockito:mockito-core:2.17.0'
-
-
-
     //For Single and Flowable queries:
     implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
-    //libs for parser Json to Pojo
+    //Json to Pojo libs
     implementation 'com.google.code.gson:gson:2.8.2'
-
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
-
+    //data binding kotlin
     kapt 'com.android.databinding:compiler:3.1.0'
-
+    //glide lib
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
-
+    //anko lib
     compile "org.jetbrains.anko:anko:0.10.4"
 
 }

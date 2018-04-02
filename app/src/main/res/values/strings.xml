@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MovieDB</string>
-    <string name="red_error">Sin acceso a internet, ahora estás en modo Offline</string>
-    <string name="error">error</string>
-    <string name="exit">Cerrar</string>
+    <string name="red_error">Internet not available, Offline mode</string>
+    <string name="error">Error</string>
+    <string name="exit">Exit</string>
     <string name="no_overview">Sorry! We don\'t have an overview</string>
+    <string name="search">Search</string>
 </resources>
